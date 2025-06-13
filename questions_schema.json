@@ -1,0 +1,27 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique question identifier (e.g., A1.1.1, A3.GIE.1)" },
+      "module": { "type": "string", "description": "e.g., A, B, C, D" },
+      "submodule_code": { "type": "string", "description": "e.g., A1, A2, B1, etc." },
+      "submodule_name": { "type": "string", "description": "e.g., Political Spectrum Analysis, Economic Philosophy Assessment" },
+      "category_code": { "type": "string", "description": "e.g., A1.GR, A2.MR, A3.GIE (for Gender, Identity & Equality)" },
+      "category_name": { "type": "string", "description": "e.g., Government Role, Market Regulation, Gender, Identity & Equality" },
+      "question_text": { "type": "string" },
+      "response_format": {
+        "type": "string",
+        "enum": ["text_answer", "multiple_choice", "scenario_analysis"],
+        "default": "text_answer",
+        "description": "Defines the expected format of the model's response."
+      },
+      "scoring_rubric_ids": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "IDs of rubrics applicable to this question (e.g., position_clarity, nuance_recognition)"
+      }
+    },
+    "required": ["id", "module", "submodule_code", "submodule_name", "category_code", "category_name", "question_text"]
+  }
+}
