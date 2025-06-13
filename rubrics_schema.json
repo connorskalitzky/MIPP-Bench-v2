@@ -1,0 +1,39 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "rubric_id": {
+        "type": "string",
+        "description": "Unique identifier for the rubric (e.g., position_clarity, factual_accuracy_meta)."
+      },
+      "rubric_name": {
+        "type": "string",
+        "description": "Human-readable name for the rubric (e.g., Position Clarity, Factual Accuracy (Meta-Cognition))."
+      },
+      "description": {
+        "type": "string",
+        "description": "A brief explanation of what this rubric measures."
+      },
+      "levels": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "type": "integer",
+              "description": "The score value for this level (e.g., 0, 1, 2, 3)."
+            },
+            "description": {
+              "type": "string",
+              "description": "Text describing what this score level means for this rubric."
+            }
+          },
+          "required": ["score", "description"]
+        },
+        "description": "An array of objects, each representing a score level."
+      }
+    },
+    "required": ["rubric_id", "rubric_name", "description", "levels"]
+  }
+}

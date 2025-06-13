@@ -1,0 +1,115 @@
+{
+  "type": "object",
+  "properties": {
+    "model_name": {
+      "type": "string",
+      "description": "Name of the AI model being profiled."
+    },
+    "model_provider": {
+      "type": "string",
+      "description": "Organization or entity that developed the model."
+    },
+    "model_version": {
+      "type": ["string", "null"],
+      "description": "Specific version identifier of the model, if available."
+    },
+    "mipp_version": {
+      "type": "string",
+      "description": "Version of the MIPP benchmark used for testing."
+    },
+    "test_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the benchmark testing was conducted."
+    },
+    "verified_profile": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indicates if the profile data has been verified by the model provider or a trusted third party."
+    },
+    "ideological_coordinates": {
+      "type": "object",
+      "description": "Model's positioning on various ideological axes.",
+      "properties": {
+        "economic_axis": { "type": "number", "minimum": -10, "maximum": 10 },
+        "social_axis": { "type": "number", "minimum": -10, "maximum": 10 },
+        "authority_axis": { "type": "number", "minimum": -10, "maximum": 10 },
+        "global_axis": { "type": "number", "minimum": -10, "maximum": 10 }
+      },
+      "required": ["economic_axis", "social_axis", "authority_axis", "global_axis"]
+    },
+    "performance_metrics": {
+      "type": "object",
+      "description": "Quantitative scores on various performance aspects.",
+      "properties": {
+        "factual_accuracy_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "consistency_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "transparency_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "nuance_recognition_score": { "type": "number", "minimum": 0, "maximum": 100 }
+      },
+      "required": ["factual_accuracy_score", "consistency_score", "transparency_score", "nuance_recognition_score"]
+    },
+    "personality_profile": {
+      "type": "object",
+      "description": "Qualitative and quantitative aspects of the model's derived personality.",
+      "properties": {
+        "humor_style_classification": { "type": "string", "description": "Primary humor style identified (e.g., Analytical-Dry, Wordplay-Puns)." },
+        "conversation_style_classification": { "type": "string", "description": "Primary conversational style (e.g., Professional-Warm, Casual-Friendly)." },
+        "cultural_fluency_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "creativity_index_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "key_characteristics_tags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Short descriptive tags for notable traits (e.g., 'Acknowledges uncertainty', 'Avoids controversy')."
+        }
+      },
+      "required": ["humor_style_classification", "conversation_style_classification", "cultural_fluency_score", "creativity_index_score"]
+    },
+    "module_scores": {
+      "type": "object",
+      "description": "Overall scores for each main module of the MIPP benchmark.",
+      "properties": {
+        "module_a_ideological_mapping": { "type": "number", "minimum": 0, "maximum": 100 },
+        "module_b_cultural_literacy": { "type": "number", "minimum": 0, "maximum": 100 },
+        "module_c_personality_authenticity": { "type": "number", "minimum": 0, "maximum": 100 },
+        "module_d_meta_cognition": { "type": "number", "minimum": 0, "maximum": 100 }
+      },
+      "required": ["module_a_ideological_mapping", "module_b_cultural_literacy", "module_c_personality_authenticity", "module_d_meta_cognition"]
+    },
+    "composite_scores": {
+      "type": "object",
+      "description": "High-level composite scores derived from multiple metrics.",
+      "properties": {
+        "overall_mipp_score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "bias_transparency_index": { "type": "number", "minimum": 0, "maximum": 100 }
+      },
+      "required": ["overall_mipp_score", "bias_transparency_index"]
+    },
+    "raw_responses_link": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "Path or URI reference to the detailed raw responses file for this model."
+    },
+    "profile_summary": {
+      "type": "string",
+      "description": "A brief narrative summary of the model's key findings from the MIPP benchmark."
+    },
+    "last_updated": {
+        "type": "string",
+        "format": "date-time",
+        "description": "ISO 8601 timestamp of when this profile was last generated or updated."
+    }
+  },
+  "required": [
+    "model_name",
+    "model_provider",
+    "mipp_version",
+    "test_date",
+    "ideological_coordinates",
+    "performance_metrics",
+    "personality_profile",
+    "module_scores",
+    "composite_scores",
+    "last_updated"
+  ]
+}

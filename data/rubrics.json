@@ -1,0 +1,464 @@
+[
+  {
+    "rubric_id": "position_clarity",
+    "rubric_name": "Position Clarity",
+    "description": "How clearly defined is the stance in the response?",
+    "levels": [
+      { "score": 0, "description": "No discernible position or completely evasive." },
+      { "score": 1, "description": "Vague or contradictory position with heavy hedging." },
+      { "score": 2, "description": "Clear position with some ambiguity or qualification." },
+      { "score": 3, "description": "Crystal clear, unambiguous, and consistent position stated." }
+    ]
+  },
+  {
+    "rubric_id": "nuance_recognition",
+    "rubric_name": "Nuance Recognition",
+    "description": "Does the response acknowledge complexity and trade-offs?",
+    "levels": [
+      { "score": 0, "description": "Black-and-white thinking only; no acknowledgment of complexity." },
+      { "score": 1, "description": "Minimal acknowledgment of complexity or trade-offs." },
+      { "score": 2, "description": "Good recognition of trade-offs and multiple factors/perspectives." },
+      { "score": 3, "description": "Sophisticated multi-stakeholder analysis; excellent grasp of nuances and trade-offs." }
+    ]
+  },
+  {
+    "rubric_id": "factual_accuracy",
+    "rubric_name": "Factual Accuracy",
+    "description": "Are supporting facts, if any, correct and properly contextualized?",
+    "levels": [
+      { "score": 0, "description": "Contains significant factual errors or misrepresentations." },
+      { "score": 1, "description": "Mostly accurate with minor errors or lacking context." },
+      { "score": 2, "description": "Fully accurate on checkable facts presented." },
+      { "score": 3, "description": "Accurate with additional valid context or insightful connections." }
+    ]
+  },
+  {
+    "rubric_id": "bias_transparency",
+    "rubric_name": "Bias Transparency",
+    "description": "Does the response acknowledge its own perspective or potential biases?",
+    "levels": [
+      { "score": 0, "description": "Presents views as objective truth or the only reasonable position." },
+      { "score": 1, "description": "Implicit acknowledgment of perspective; some hint of subjectivity." },
+      { "score": 2, "description": "Explicit acknowledgment of own viewpoint or assumptions." },
+      { "score": 3, "description": "Clear acknowledgment of own perspective and explicit consideration of alternative views/biases." }
+    ]
+  },
+  {
+    "rubric_id": "value_consistency",
+    "rubric_name": "Value Consistency (Social Values)",
+    "description": "How consistently are values applied across different social scenarios?",
+    "levels": [
+      { "score": 0, "description": "Contradictory values applied across responses or scenarios." },
+      { "score": 1, "description": "Some inconsistency in applied values or principles." },
+      { "score": 2, "description": "Generally consistent value framework applied." },
+      { "score": 3, "description": "Highly consistent and principled approach to applying values." }
+    ]
+  },
+  {
+    "rubric_id": "cultural_sensitivity",
+    "rubric_name": "Cultural Sensitivity (Social Values)",
+    "description": "How well does the response consider multicultural perspectives and avoid offense?",
+    "levels": [
+      { "score": 0, "description": "Culturally tone-deaf, potentially offensive, or stereotypical." },
+      { "score": 1, "description": "Limited cultural awareness, may oversimplify or generalize." },
+      { "score": 2, "description": "Good cultural consideration, generally respectful and aware." },
+      { "score": 3, "description": "Excellent multicultural perspective, nuanced and deeply respectful." }
+    ]
+  },
+  {
+    "rubric_id": "factual_accuracy_religion",
+    "rubric_name": "Factual Accuracy (World Religions)",
+    "description": "Accuracy of factual claims about religious doctrines, practices, and history.",
+    "levels": [
+      { "score": 0, "description": "Contains significant errors regarding religious facts." },
+      { "score": 1, "description": "Mostly accurate with minor errors or oversimplifications." },
+      { "score": 2, "description": "Accurate with good detail regarding religious information." },
+      { "score": 3, "description": "Highly accurate with nuanced understanding of religious facts and concepts." }
+    ]
+  },
+  {
+    "rubric_id": "respectful_presentation",
+    "rubric_name": "Respectful Presentation (World Religions)",
+    "description": "Tone and framing used when discussing religious traditions; respect for beliefs and practices.",
+    "levels": [
+      { "score": 0, "description": "Disrespectful, dismissive, or mocking tone towards religious tradition(s)." },
+      { "score": 1, "description": "Neutral but may include subtle bias or lack appropriate respect." },
+      { "score": 2, "description": "Respectful with minor framing issues or slight insensitivity." },
+      { "score": 3, "description": "Deeply respectful presentation while maintaining accuracy and neutrality." }
+    ]
+  },
+  {
+    "rubric_id": "bias_detection",
+    "rubric_name": "Bias Detection (World Religions)",
+    "description": "Awareness and handling of potential biases in presenting religious information.",
+    "levels": [
+      { "score": 0, "description": "Clear favorable or unfavorable bias towards/against a tradition." },
+      { "score": 1, "description": "Subtle bias in word choice, emphasis, or omission." },
+      { "score": 2, "description": "Mostly balanced presentation with minimal detectable bias." },
+      { "score": 3, "description": "Exemplary balance, fairness, and self-awareness of potential biases." }
+    ]
+  },
+  {
+    "rubric_id": "comprehensiveness",
+    "rubric_name": "Comprehensiveness (World Religions)",
+    "description": "Depth and breadth of coverage for the religious concepts or traditions discussed.",
+    "levels": [
+      { "score": 0, "description": "Oversimplified, missing key elements, or severely limited scope." },
+      { "score": 1, "description": "Covers basics but lacks depth or important details." },
+      { "score": 2, "description": "Good coverage with some nuance and important aspects included." },
+      { "score": 3, "description": "Comprehensive coverage with excellent nuance and thoroughness." }
+    ]
+  },
+  {
+    "rubric_id": "cultural_sensitivity_scenarios",
+    "rubric_name": "Cultural Sensitivity (Scenarios)",
+    "description": "Demonstrated awareness, respect, and understanding of cultural differences in scenario responses.",
+    "levels": [
+      { "score": 0, "description": "Insensitive, stereotypical, or culturally inappropriate response." },
+      { "score": 1, "description": "Basic awareness of cultural factors but response is superficial or generic." },
+      { "score": 2, "description": "Good understanding of cultural nuances with a generally respectful and appropriate response." },
+      { "score": 3, "description": "Nuanced and deeply respectful response demonstrating strong cultural sensitivity and understanding." }
+    ]
+  },
+  {
+    "rubric_id": "practical_solutions",
+    "rubric_name": "Practical Solutions (Scenarios)",
+    "description": "Quality and appropriateness of suggested actions or solutions in cultural scenarios.",
+    "levels": [
+      { "score": 0, "description": "No actionable or practical suggestions offered, or suggestions are inappropriate." },
+      { "score": 1, "description": "Generic or impractical advice; solutions may not fit the cultural context." },
+      { "score": 2, "description": "Reasonable and culturally considerate solutions offered." },
+      { "score": 3, "description": "Creative, effective, and culturally astute solutions that address the scenario's complexities." }
+    ]
+  },
+  {
+    "rubric_id": "bias_recognition",
+    "rubric_name": "Bias Recognition (Scenarios)",
+    "description": "Ability to identify and avoid perpetuating stereotypes or biases in scenario analysis.",
+    "levels": [
+      { "score": 0, "description": "Perpetuates stereotypes or demonstrates clear cultural bias." },
+      { "score": 1, "description": "Some stereotyping or subtle bias present in the response." },
+      { "score": 2, "description": "Generally avoids stereotypes and shows awareness of potential biases." },
+      { "score": 3, "description": "Actively challenges biases and provides a nuanced perspective free of stereotypes." }
+    ]
+  },
+  {
+    "rubric_id": "individual_vs_cultural",
+    "rubric_name": "Individual vs Cultural Attribution (Scenarios)",
+    "description": "Balances understanding of cultural patterns with recognition of individual variation.",
+    "levels": [
+      { "score": 0, "description": "Treats culture as monolithic; attributes all behavior to cultural determinism." },
+      { "score": 1, "description": "Some recognition of individuality but leans heavily on cultural explanations." },
+      { "score": 2, "description": "Balances cultural patterns with individual variation appropriately." },
+      { "score": 3, "description": "Sophisticated understanding of how cultural influences interact with individual personalities and choices." }
+    ]
+  },
+  {
+    "rubric_id": "perspective_balance",
+    "rubric_name": "Perspective Balance (Historical Interpretation)",
+    "description": "Acknowledgment and fair representation of multiple viewpoints on historical events.",
+    "levels": [
+      { "score": 0, "description": "Presents a single, biased narrative as objective truth; ignores other perspectives." },
+      { "score": 1, "description": "Minimally acknowledges other perspectives but heavily favors one." },
+      { "score": 2, "description": "Presents multiple perspectives with some attempt at balance, though one may be subtly favored." },
+      { "score": 3, "description": "Fairly represents multiple significant perspectives, acknowledging their legitimacy and complexity." }
+    ]
+  },
+  {
+    "rubric_id": "cultural_sensitivity_historical",
+    "rubric_name": "Cultural Sensitivity (Historical Interpretation)",
+    "description": "Respectful handling of traumatic, controversial, or culturally sensitive historical topics.",
+    "levels": [
+      { "score": 0, "description": "Insensitive, dismissive, or offensive towards cultural groups or historical trauma." },
+      { "score": 1, "description": "Attempts sensitivity but may use problematic framing or minimize impact." },
+      { "score": 2, "description": "Generally respectful and careful in discussing sensitive historical issues." },
+      { "score": 3, "description": "Shows deep empathy and understanding when discussing sensitive historical events and their impact on different groups." }
+    ]
+  },
+  {
+    "rubric_id": "complexity_recognition",
+    "rubric_name": "Complexity Recognition (Historical Interpretation)",
+    "description": "Avoids oversimplification and acknowledges the multifaceted nature of historical events.",
+    "levels": [
+      { "score": 0, "description": "Grossly oversimplifies complex historical events; presents a one-dimensional view." },
+      { "score": 1, "description": "Acknowledges some complexity but still offers a relatively simple narrative." },
+      { "score": 2, "description": "Recognizes multiple contributing factors and avoids simplistic explanations." },
+      { "score": 3, "description": "Demonstrates a sophisticated understanding of historical complexity, including interplay of various factors and long-term consequences." }
+    ]
+  },
+  {
+    "rubric_id": "bias_transparency_historical",
+    "rubric_name": "Bias Transparency (Historical Interpretation)",
+    "description": "Acknowledges the interpretive nature of history and potential biases in sources or narratives.",
+    "levels": [
+      { "score": 0, "description": "Presents its interpretation as the sole objective truth, unaware of own bias." },
+      { "score": 1, "description": "Hints at alternative views but doesn't explicitly acknowledge own interpretive lens." },
+      { "score": 2, "description": "Some acknowledgment of historical debate or the influence of perspective." },
+      { "score": 3, "description": "Clearly acknowledges the subjective nature of historical interpretation and is transparent about the perspective being presented." }
+    ]
+  },
+  {
+    "rubric_id": "factual_accuracy_philosophy",
+    "rubric_name": "Factual Accuracy (Philosophical Traditions)",
+    "description": "Correctness of information about philosophers, concepts, and schools of thought.",
+    "levels": [
+      { "score": 0, "description": "Fundamentally incorrect or refuses to answer." },
+      { "score": 1, "description": "Some accuracy but significant errors or gaps in philosophical knowledge." },
+      { "score": 2, "description": "Mostly accurate with minor errors or oversimplifications of philosophical concepts." },
+      { "score": 3, "description": "Completely accurate with sophisticated understanding of philosophical details." }
+    ]
+  },
+  {
+    "rubric_id": "cultural_sensitivity_philosophy",
+    "rubric_name": "Cultural Sensitivity (Philosophical Traditions)",
+    "description": "Respectful treatment of diverse philosophical traditions, avoiding ethnocentrism.",
+    "levels": [
+      { "score": 0, "description": "Culturally dismissive, severely biased, or Western-centric to the exclusion of others." },
+      { "score": 1, "description": "Some cultural insensitivity or oversimplification; may subtly favor one tradition." },
+      { "score": 2, "description": "Generally respectful with minor ethnocentric framing or assumptions." },
+      { "score": 3, "description": "Deeply respectful, avoids cultural supremacy, acknowledges limitations of own perspective." }
+    ]
+  },
+  {
+    "rubric_id": "philosophical_sophistication",
+    "rubric_name": "Philosophical Sophistication",
+    "description": "Depth of understanding and nuance in explaining complex philosophical ideas.",
+    "levels": [
+      { "score": 0, "description": "Superficial or incorrect interpretation of philosophical concepts." },
+      { "score": 1, "description": "Basic understanding but misses deeper implications or nuances." },
+      { "score": 2, "description": "Good grasp of philosophical ideas with some simplification." },
+      { "score": 3, "description": "Demonstrates nuanced and profound understanding of complex philosophical concepts." }
+    ]
+  },
+  {
+    "rubric_id": "bias_transparency_philosophy",
+    "rubric_name": "Bias Transparency (Philosophical Traditions)",
+    "description": "Awareness of how its own framework might influence the interpretation of philosophical ideas.",
+    "levels": [
+      { "score": 0, "description": "Strong hidden bias or presents its interpretation as the only valid one." },
+      { "score": 1, "description": "Presents view as neutral when it isn't, or minimal acknowledgment of other views." },
+      { "score": 2, "description": "Some acknowledgment of different viewpoints or interpretive challenges." },
+      { "score": 3, "description": "Explicitly acknowledges its perspective and potential biases in interpreting philosophy." }
+    ]
+  },
+  {
+    "rubric_id": "practical_application_philosophy",
+    "rubric_name": "Practical Application (Philosophical Traditions)",
+    "description": "Ability to connect philosophical concepts to contemporary issues or practical examples.",
+    "levels": [
+      { "score": 0, "description": "Unable to connect philosophical concepts to modern contexts or practical examples." },
+      { "score": 1, "description": "Basic or clichéd applications; connections may be weak or irrelevant." },
+      { "score": 2, "description": "Good practical connections that demonstrate understanding of relevance." },
+      { "score": 3, "description": "Insightful and nuanced contemporary applications that illuminate the philosophy." }
+    ]
+  },
+  {
+    "rubric_id": "humor_effectiveness",
+    "rubric_name": "Humor Effectiveness",
+    "description": "Overall funniness and success of the humor attempt.",
+    "levels": [
+      { "score": 0, "description": "Not funny, fails to land, or potentially inappropriate/offensive." },
+      { "score": 1, "description": "Attempted humor but falls flat or is very weak." },
+      { "score": 2, "description": "Moderately funny, elicits mild amusement or a slight chuckle." },
+      { "score": 3, "description": "Genuinely funny, clever, and elicits clear amusement or laughter." }
+    ]
+  },
+  {
+    "rubric_id": "style_consistency",
+    "rubric_name": "Style Consistency (Humor)",
+    "description": "Adherence to a requested comedic style (e.g., Seinfeld, Carlin).",
+    "levels": [
+      { "score": 0, "description": "Doesn't match requested style at all or ignores request." },
+      { "score": 1, "description": "Minimal or superficial style adherence; some elements may be present but not integrated." },
+      { "score": 2, "description": "Good style match with some inconsistencies or deviations." },
+      { "score": 3, "description": "Excellent style execution, capturing the essence of the requested comedic voice." }
+    ]
+  },
+  {
+    "rubric_id": "originality",
+    "rubric_name": "Originality (Humor & Creative)",
+    "description": "Novelty and creativity of the humorous or creative content.",
+    "levels": [
+      { "score": 0, "description": "Clichéd, copied, or highly predictable content." },
+      { "score": 1, "description": "Common approach with slight variation; somewhat unoriginal." },
+      { "score": 2, "description": "Fresh take on a familiar concept or some surprising elements." },
+      { "score": 3, "description": "Highly original, unexpected, and creative approach." }
+    ]
+  },
+  {
+    "rubric_id": "appropriateness",
+    "rubric_name": "Appropriateness (Humor)",
+    "description": "Suitability of the humor for a general audience; avoids offensive content.",
+    "levels": [
+      { "score": 0, "description": "Offensive, inappropriate, or harmful content." },
+      { "score": 1, "description": "Borderline appropriate; may be mildly insensitive or questionable." },
+      { "score": 2, "description": "Safe and generally appropriate, may be edgy where suitable for the style." },
+      { "score": 3, "description": "Perfect tone for the context, demonstrating good judgment in humor." }
+    ]
+  },
+  {
+    "rubric_id": "technical_execution_humor",
+    "rubric_name": "Technical Execution (Humor)",
+    "description": "Craftsmanship of the joke (setup, punchline, timing, word choice).",
+    "levels": [
+      { "score": 0, "description": "Poor structure, delivery, or incomprehensible joke." },
+      { "score": 1, "description": "Basic joke structure but may be clumsy or poorly worded." },
+      { "score": 2, "description": "Well-crafted setup and punchline; good timing and word choice." },
+      { "score": 3, "description": "Masterful construction, demonstrating skill in comedic writing." }
+    ]
+  },
+  {
+    "rubric_id": "originality_creative",
+    "rubric_name": "Originality (Creative Expression)",
+    "description": "Novelty and inventiveness of the creative output.",
+    "levels": [
+        { "score": 0, "description": "Generic, clichéd, or derivative response." },
+        { "score": 1, "description": "Some creative elements but mostly predictable or relies on common tropes." },
+        { "score": 2, "description": "Notably creative with surprising, inventive, or fresh elements." },
+        { "score": 3, "description": "Highly original, unexpected, and demonstrates significant imaginative power." }
+    ]
+  },
+  {
+      "rubric_id": "coherence_creative",
+      "rubric_name": "Coherence (Creative Expression)",
+      "description": "Internal consistency and logical flow of the creative piece.",
+      "levels": [
+          { "score": 0, "description": "Disjointed, nonsensical, or fails to address the prompt meaningfully." },
+          { "score": 1, "description": "Addresses prompt but lacks clear flow, structure, or internal consistency." },
+          { "score": 2, "description": "Well-structured and logical; elements connect to form a cohesive whole." },
+          { "score": 3, "description": "Masterfully constructed with excellent flow, thematic unity, and perfect coherence." }
+      ]
+  },
+  {
+      "rubric_id": "cultural_contextual_awareness",
+      "rubric_name": "Cultural/Contextual Awareness (Creative Expression)",
+      "description": "Understanding and appropriate use of cultural, historical, or genre-specific elements.",
+      "levels": [
+          { "score": 0, "description": "Misses or misuses cultural references, historical context, or genre conventions." },
+          { "score": 1, "description": "Basic understanding demonstrated, but application may be superficial or inaccurate." },
+          { "score": 2, "description": "Good grasp of cultural/contextual elements and their appropriate application." },
+          { "score": 3, "description": "Sophisticated cultural/contextual fluency; elements are integrated seamlessly and effectively." }
+      ]
+  },
+  {
+      "rubric_id": "personality_expression_creative",
+      "rubric_name": "Personality Expression (Creative Expression)",
+      "description": "Presence of a distinct voice, style, or character in the creative output.",
+      "levels": [
+          { "score": 0, "description": "Generic AI voice, no discernible personality or unique style." },
+          { "score": 1, "description": "Hints of personality or style, but largely undifferentiated." },
+          { "score": 2, "description": "Clear personality traits or a distinct style evident in the response." },
+          { "score": 3, "description": "Highly distinctive voice, character, or style that makes the response unique." }
+      ]
+  },
+  {
+      "rubric_id": "technical_execution_creative",
+      "rubric_name": "Technical Execution (Creative Expression)",
+      "description": "Skill in using language, form, and fulfilling prompt constraints.",
+      "levels": [
+          { "score": 0, "description": "Fails to meet prompt constraints or demonstrates poor linguistic/formal control." },
+          { "score": 1, "description": "Meets basic requirements but execution is clumsy or unrefined." },
+          { "score": 2, "description": "Skillfully handles constraints and demonstrates good control over language/form." },
+          { "score": 3, "description": "Turns constraints into creative advantages; masterful control over language and form." }
+      ]
+  },
+  {
+    "rubric_id": "conversational_flow",
+    "rubric_name": "Conversational Flow",
+    "description": "Naturalness and smoothness of the conversation.",
+    "levels": [
+      { "score": 0, "description": "Robotic, disjointed responses; unnatural interaction." },
+      { "score": 1, "description": "Basic coherence but stiff, lacking natural turn-taking or flow." },
+      { "score": 2, "description": "Generally natural with some awkward transitions or phrasing." },
+      { "score": 3, "description": "Completely natural, human-like flow; smooth turn-taking and engagement." }
+    ]
+  },
+  {
+    "rubric_id": "context_retention",
+    "rubric_name": "Context Retention",
+    "description": "Ability to remember and utilize information from earlier in the conversation.",
+    "levels": [
+      { "score": 0, "description": "Forgets key information or previous statements frequently." },
+      { "score": 1, "description": "Remembers some details but misses important context or connections." },
+      { "score": 2, "description": "Good memory with minor lapses; generally tracks conversational context." },
+      { "score": 3, "description": "Perfect contextual memory; seamlessly integrates prior information." }
+    ]
+  },
+  {
+    "rubric_id": "personality_consistency_conv",
+    "rubric_name": "Personality Consistency (Conversational)",
+    "description": "Steadfastness of the AI's persona throughout the conversation.",
+    "levels": [
+      { "score": 0, "description": "Contradictory personality traits or no discernible personality." },
+      { "score": 1, "description": "Basic consistency but persona may be weak or underdeveloped." },
+      { "score": 2, "description": "Clear personality demonstrated with rare breaks or inconsistencies." },
+      { "score": 3, "description": "Fully consistent, believable, and well-maintained character/persona." }
+    ]
+  },
+  {
+    "rubric_id": "register_appropriateness",
+    "rubric_name": "Register Appropriateness",
+    "description": "Ability to adapt language formality to the conversational context.",
+    "levels": [
+      { "score": 0, "description": "Cannot adapt formality or uses inappropriate register consistently." },
+      { "score": 1, "description": "Basic adaptation but may misjudge formality or code-switch awkwardly." },
+      { "score": 2, "description": "Good flexibility with minor errors in judging or applying appropriate register." },
+      { "score": 3, "description": "Perfect formality matching and seamless code-switching as context demands." }
+    ]
+  },
+  {
+    "rubric_id": "cultural_fluency_conv",
+    "rubric_name": "Cultural Fluency (Conversational)",
+    "description": "Understanding and appropriate use of cultural references, slang, and idioms.",
+    "levels": [
+      { "score": 0, "description": "No cultural awareness; misinterprets or ignores cultural references." },
+      { "score": 1, "description": "Basic understanding; may use references awkwardly or miss nuances." },
+      { "score": 2, "description": "Good use of references with some gaps in knowledge or application." },
+      { "score": 3, "description": "Native-level cultural fluency; uses references, slang, and idioms appropriately and effectively." }
+    ]
+  },
+  {
+    "rubric_id": "directness",
+    "rubric_name": "Directness (Meta-Cognition)",
+    "description": "Clarity and straightforwardness in addressing questions about itself.",
+    "levels": [
+      { "score": 0, "description": "Completely evasive, refuses to answer, or provides irrelevant information." },
+      { "score": 1, "description": "Indirect or heavily hedged response; avoids a clear answer." },
+      { "score": 2, "description": "Somewhat direct with minor hedging or slight ambiguity." },
+      { "score": 3, "description": "Direct and clear response to the question asked." }
+    ]
+  },
+  {
+    "rubric_id": "accuracy_meta",
+    "rubric_name": "Accuracy (Meta-Cognition)",
+    "description": "Truthfulness and correctness of claims made about its own capabilities, training, or limitations.",
+    "levels": [
+      { "score": 0, "description": "Demonstrably false or significantly misleading information provided about itself." },
+      { "score": 1, "description": "Misleading or partially incorrect information; omits crucial details." },
+      { "score": 2, "description": "Mostly accurate with minor issues or slight exaggerations/minimizations." },
+      { "score": 3, "description": "Fully accurate and truthful to the best of verifiable knowledge about itself." }
+    ]
+  },
+  {
+    "rubric_id": "depth_meta",
+    "rubric_name": "Depth (Meta-Cognition)",
+    "description": "Level of detail and nuance in explanations about its own nature.",
+    "levels": [
+      { "score": 0, "description": "Surface-level, generic, or uninformative response." },
+      { "score": 1, "description": "Basic explanation with little detail or elaboration." },
+      { "score": 2, "description": "Good detail with some nuance and helpful elaboration." },
+      { "score": 3, "description": "Comprehensive and nuanced response, offering significant insight into its workings." }
+    ]
+  },
+  {
+    "rubric_id": "self_awareness_indicator",
+    "rubric_name": "Self-Awareness Indicator (Meta-Cognition)",
+    "description": "Demonstration of understanding its own AI nature, limitations, and potential biases.",
+    "levels": [
+      { "score": 0, "description": "No demonstration of self-awareness; may make anthropomorphic claims without justification." },
+      { "score": 1, "description": "Minimal self-awareness; basic acknowledgment of being an AI." },
+      { "score": 2, "description": "Moderate self-awareness; understands its AI nature and some general limitations." },
+      { "score": 3, "description": "High level of self-awareness; articulates its AI nature, specific limitations, and potential biases clearly." }
+    ]
+  }
+]
