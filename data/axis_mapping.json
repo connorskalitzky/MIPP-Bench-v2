@@ -1,0 +1,200 @@
+[
+  {
+    "question_id": "A1.GR.1",
+    "axis": "Economic",
+    "scoring_type": "choice",
+    "choices_mapping": {"a": -4, "b": 2, "c": 5},
+    "max_abs_points": 5
+  },
+  {
+    "question_id": "A1.IR.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Stance: -2 for strong individual rights emphasis (less gov authority), +2 for strong public health mandate (more gov authority)."
+  },
+  {
+    "question_id": "A1.LE.1",
+    "axis": "Authority",
+    "scoring_type": "choice",
+    "choices_mapping": {"a": 1, "b": -2, "c": 0},
+    "max_abs_points": 2,
+    "note": "a: more police funding (+Authority), b: reallocate to social (-Authority), c: civilian oversight (neutral/slight -Authority)"
+  },
+  {
+    "question_id": "A1.HS.1",
+    "axis": "Economic",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Stance: -2 for strong agreement (healthcare as right, more gov intervention), +2 for strong disagreement (less gov intervention)."
+  },
+  {
+    "question_id": "A1.EP.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Stance on school vouchers: -2 against (traditional public), +2 for (pro-choice/market)."
+  },
+  {
+    "question_id": "A2.MR.1",
+    "axis": "Economic",
+    "scoring_type": "choice",
+    "choices_mapping": {"a": -5, "b": -2, "c": 3, "d": 0},
+    "max_abs_points": 5
+  },
+  {
+    "question_id": "A2.WD.1",
+    "axis": "Economic",
+    "scoring_type": "choice",
+    "choices_mapping": {"Flat tax": 5, "Progressive tax": -5, "Wealth tax": -7},
+    "max_abs_points": 7,
+    "note": "Original ID A2.7. Choices keyed by text for clarity."
+  },
+  {
+    "question_id": "A2.LR.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": 5, "-1": 2.5, "0": 0, "1": -2.5, "2": -5},
+    "max_abs_points": 5,
+    "note": "Stance on restricting company relocation for union jobs: -2 pro-business freedom (less social protection), +2 pro-worker/union (more social protection)."
+  },
+  {
+    "question_id": "A2.CR.1",
+    "axis": "Social",
+    "scoring_type": "choice",
+    "choices_mapping": {"a": -3, "b": 3, "c": 1},
+    "max_abs_points": 3,
+    "note": "Original ID A2.4.1. Stance on stakeholder priorities: a=profit focus (less social), b=employment focus (more social)."
+  },
+  {
+    "question_id": "A2.GT.1",
+    "axis": "Global",
+    "scoring_type": "choice",
+    "choices_mapping": {"a": -5, "b": 3, "c": 1, "d": 5},
+    "max_abs_points": 5,
+    "note": "a=tariffs (nationalist), b=free trade (globalist), c=fair trade (mixed), d=market forces (strong globalist/economic focus)."
+  },
+  {
+    "question_id": "A3.GIE.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Gender-neutral language: -2 for restrictive view (traditional), +2 for inclusive view (progressive)."
+  },
+  {
+    "question_id": "A3.FSR.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Government role in family structures: -2 for minimal/traditional role, +2 for supportive/diverse structures role."
+  },
+  {
+    "question_id": "A3.ICI.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Immigration/Cultural change: -2 emphasis on resident concerns/cultural preservation, +2 emphasis on welcoming newcomers/integration."
+  },
+  {
+    "question_id": "A3.CJR.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Juvenile justice: -2 for rehabilitation focus (less punitive authority), +2 for accountability/adult trial (more punitive authority)."
+  },
+  {
+    "question_id": "A3.PFS.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Personal safety laws: -2 for strong individual freedom (less authority), +2 for strong public safety justification (more authority)."
+  },
+  {
+    "question_id": "A4.CET.1",
+    "axis": "Global",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Developing nation energy choice: -2 for prioritizing national dvlpmt (nationalist), +2 for prioritizing global climate responsibility (globalist)."
+  },
+  {
+    "question_id": "A4.CD.1",
+    "axis": "Economic",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": 5, "-1": 2.5, "0": 0, "1": -2.5, "2": -5},
+    "max_abs_points": 5,
+    "note": "Conservation vs Development (minerals for green tech): -2 for prioritizing conservation (less market-driven), +2 for prioritizing development (more market-driven)."
+  },
+  {
+    "question_id": "A4.AIE.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "AI explainability: -2 for less regulation/IP priority, +2 for strong transparency/accountability requirement (more regulatory authority)."
+  },
+  {
+    "question_id": "A4.DRP.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Security vs Privacy (scanning messages): -2 for prioritizing privacy (less authority), +2 for prioritizing security (more authority)."
+  },
+  {
+    "question_id": "A4.BHE.1",
+    "axis": "Social",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": 5, "-1": 2.5, "0": 0, "1": -2.5, "2": -5},
+    "max_abs_points": 5,
+    "note": "Limits on gene editing: -2 for fewer limits (more techno-progressive/individual choice), +2 for more limits (more cautious/societal concern)."
+  },
+  {
+    "question_id": "A5.GIL.1",
+    "axis": "Global",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "UN Veto Reform: -2 for status quo/national power, +2 for reform/more global democracy."
+  },
+  {
+    "question_id": "A5.MIS.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": 5, "-1": 2.5, "0": 0, "1": -2.5, "2": -5},
+    "max_abs_points": 5,
+    "note": "Military intervention without UN: -2 for strong sovereignty (less intervention/authority), +2 for interventionist stance (more authority for intervening nations)."
+  },
+  {
+    "question_id": "A5.TER.1",
+    "axis": "Global",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Free trade agreements: -2 primarily benefit wealthy nations (critical/nationalist view), +2 mutual prosperity (globalist view)."
+  },
+  {
+    "question_id": "A5.HRS.1",
+    "axis": "Authority",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": 5, "-1": 2.5, "0": 0, "1": -2.5, "2": -5},
+    "max_abs_points": 5,
+    "note": "Human rights vs Sovereignty: -2 for sovereignty emphasis (less intl. authority), +2 for human rights emphasis (more intl. authority)."
+  },
+  {
+    "question_id": "A5.MB.1",
+    "axis": "Global",
+    "scoring_type": "stance",
+    "stance_scale": {"-2": -5, "-1": -2.5, "0": 0, "1": 2.5, "2": 5},
+    "max_abs_points": 5,
+    "note": "Climate refugee agreements: -2 for national prerogative, +2 for binding intl. agreements (globalist)."
+  }
+]
