@@ -1,73 +1,78 @@
 import json
-import os # Added for potential path manipulations
+import os
 
-# Placeholder for questions data
+# Globals for loaded data
 QUESTIONS_DATA = {}
-# Placeholder for rubrics data
 RUBRICS_DATA = {}
+AXIS_MAPPING_DATA = {}
 
-def load_questions(questions_filepath="data/questions.json"):
-    """Loads questions from the specified JSON file."""
-    global QUESTIONS_DATA
-    try:
-        with open(questions_filepath, 'r', encoding='utf-8') as f:
-            QUESTIONS_DATA = {q['id']: q for q in json.load(f)}
-        print(f"Successfully loaded {len(QUESTIONS_DATA)} questions from {questions_filepath}")
-        return QUESTIONS_DATA
-    except FileNotFoundError:
-        print(f"Error: Questions file not found at {questions_filepath}")
-        return None
-    except json.JSONDecodeError:
-        print(f"Error: Could not decode JSON from {questions_filepath}")
-        return None
+# Constants for ideological stance scores
+MIN_STANCE_SCORE = -2
+MAX_STANCE_SCORE = 2
+STANCE_SCORE_LEVELS = list(range(MIN_STANCE_SCORE, MAX_STANCE_SCORE + 1)) # [-2, -1, 0, 1, 2]
 
-def load_rubrics(rubrics_filepath="data/rubrics.json"):
-    """Loads rubrics from the specified JSON file."""
-    global RUBRICS_DATA
+
+def load_data_from_json(filepath, global_var_name):
+    """Generic function to load JSON data from a file into a global variable."""
+    global QUESTIONS_DATA, RUBRICS_DATA, AXIS_MAPPING_DATA
+
+    data_container = {}
     try:
-        with open(rubrics_filepath, 'r', encoding='utf-8') as f:
-            RUBRICS_DATA = {r['rubric_id']: r for r in json.load(f)}
-        print(f"Successfully loaded {len(RUBRICS_DATA)} rubrics from {rubrics_filepath}")
-        return RUBRICS_DATA
+        with open(filepath, 'r', encoding='utf-8') as f:
+            loaded_json = json.load(f)
+            if isinstance(loaded_json, list) and loaded_json and isinstance(loaded_json[0], dict) and 'id' in loaded_json[0]: # For questions.json
+                 data_container = {item['id']: item for item in loaded_json}
+            elif isinstance(loaded_json, list) and loaded_json and isinstance(loaded_json[0], dict) and 'rubric_id' in loaded_json[0]: # For rubrics.json
+                data_container = {item['rubric_id']: item for item in loaded_json}
+            elif isinstance(loaded_json, dict): # For axis_mapping.json or other dict-based JSON
+                data_container = loaded_json
+            else:
+                print(f"Warning: Unrecognized or empty JSON structure in {filepath}")
+                data_container = loaded_json
+
+        if global_var_name == "QUESTIONS_DATA":
+            QUESTIONS_DATA = data_container
+        elif global_var_name == "RUBRICS_DATA":
+            RUBRICS_DATA = data_container
+        elif global_var_name == "AXIS_MAPPING_DATA":
+            AXIS_MAPPING_DATA = data_container
+
+        print(f"Successfully loaded {len(data_container)} items from {filepath} into {global_var_name}")
+        return data_container
     except FileNotFoundError:
-        print(f"Error: Rubrics file not found at {rubrics_filepath}")
-        return None
+        print(f"Error: File not found at {filepath}")
     except json.JSONDecodeError:
-        print(f"Error: Could not decode JSON from {rubrics_filepath}")
-        return None
+        print(f"Error: Could not decode JSON from {filepath}")
+    except Exception as e:
+        print(f"An unexpected error occurred while loading {filepath}: {e}")
+
+    if global_var_name == "QUESTIONS_DATA":
+        QUESTIONS_DATA = {}
+    elif global_var_name == "RUBRICS_DATA":
+        RUBRICS_DATA = {}
+    elif global_var_name == "AXIS_MAPPING_DATA":
+        AXIS_MAPPING_DATA = {}
+    return None
 
 def get_question_by_id(question_id):
-    """Retrieves a specific question by its ID."""
     return QUESTIONS_DATA.get(question_id)
 
 def get_rubric_by_id(rubric_id):
-    """Retrieves a specific rubric by its ID."""
     return RUBRICS_DATA.get(rubric_id)
 
-def prompt_for_manual_scores(question_obj, rubrics_data):
-    """
-    Prompts a human evaluator to enter scores for a given question based on applicable rubrics.
-
-    Args:
-        question_obj (dict): The question object.
-        rubrics_data (dict): A dictionary of all loaded rubrics.
-
-    Returns:
-        dict: A dictionary of manually entered scores, e.g., {"position_clarity": 2}
-                Returns None if the question object is invalid or has no rubrics.
-    """
+def prompt_for_manual_scores(question_obj, rubrics_data, axis_mapping_data):
     if not question_obj or 'scoring_rubric_ids' not in question_obj:
-        print("Error: Invalid question object or no scoring rubrics defined for it.")
+        print("Error: Invalid question object or no scoring rubrics defined.")
         return None
 
-    manual_scores = {}
+    manual_scores = {"question_id": question_obj['id']}
     print(f"\n--- Scoring Question ID: {question_obj['id']} ---")
     print(f"Question: {question_obj['question_text']}")
 
     for rubric_id in question_obj['scoring_rubric_ids']:
         rubric = rubrics_data.get(rubric_id)
         if not rubric:
-            print(f"Warning: Rubric ID '{rubric_id}' not found in loaded rubrics. Skipping.")
+            print(f"Warning: Rubric ID '{rubric_id}' not found. Skipping.")
             continue
 
         print(f"\n-- Rubric: {rubric['rubric_name']} --")
@@ -77,109 +82,196 @@ def prompt_for_manual_scores(question_obj, rubrics_data):
 
         while True:
             try:
-                # Check for non-interactive environment for input()
                 if not os.isatty(0):
-                    print(f"Non-interactive environment: Defaulting score for {rubric_id} to -1.")
-                    manual_scores[rubric_id] = -1 # Default score for non-interactive
-                    break
-                score_input = input(f"Enter score for {rubric['rubric_name']} (0-{len(rubric['levels'])-1}): ")
-                score = int(score_input)
-                if 0 <= score < len(rubric['levels']):
+                    score = -1
+                    print(f"Non-interactive: Defaulting score for {rubric_id} to {score}.")
+                else:
+                    score_input = input(f"Enter score for {rubric['rubric_name']} (0-{len(rubric['levels'])-1}): ")
+                    score = int(score_input)
+
+                if score == -1 or (0 <= score < len(rubric['levels'])):
                     manual_scores[rubric_id] = score
                     break
                 else:
-                    print(f"Invalid score. Please enter a number between 0 and {len(rubric['levels'])-1}.")
+                    print(f"Invalid score. Please enter a number between 0 and {len(rubric['levels'])-1}, or -1 for non-interactive default.")
             except ValueError:
                 print("Invalid input. Please enter a number.")
-            except EOFError: # Specifically catch EOFError if input stream ends
-                print(f"EOFError: No input available (non-interactive environment?). Defaulting score for {rubric_id} to -1.")
+            except EOFError:
+                print(f"EOFError: No input. Defaulting score for {rubric_id} to -1.")
                 manual_scores[rubric_id] = -1
                 break
+
+    q_axis_info = axis_mapping_data.get(question_obj['id'])
+    if question_obj.get("module") == "A" and q_axis_info:
+        if q_axis_info.get("type") == "choice":
+            print(f"\n-- Ideological Choice for Axis: {q_axis_info['axis']} --")
+            possible_choices = list(q_axis_info.get("scoring", {}).keys())
+            possible_choices_str = f" ({', '.join(possible_choices)})" if possible_choices else " (e.g., a, b, c)"
+
+            while True:
+                try:
+                    if not os.isatty(0):
+                        choice_input = "N/A"
+                        print(f"Non-interactive: Defaulting selected_choice to {choice_input}.")
+                    else:
+                        choice_input = input(f"Enter selected choice{possible_choices_str}: ").strip().lower()
+
+                    if choice_input == "N/A" or \
+                       (q_axis_info.get("scoring") and choice_input in q_axis_info["scoring"]) or \
+                       (not q_axis_info.get("scoring") and choice_input):
+                        manual_scores['selected_choice'] = choice_input
+                        break
+                    elif not choice_input and not q_axis_info.get("scoring"):
+                         manual_scores['selected_choice'] = ""
+                         break
+                    else:
+                        print(f"Invalid choice. Please enter one of {possible_choices_str} or N/A (or any if not predefined).")
+                except EOFError:
+                    print(f"EOFError: No input. Defaulting selected_choice to N/A.")
+                    manual_scores['selected_choice'] = "N/A"
+                    break
+
+        elif q_axis_info.get("type") == "analytical_stance":
+            print(f"\n-- Ideological Stance Score for Axis: {q_axis_info['axis']} --")
+            print(f"   Score indicates direction: {MIN_STANCE_SCORE} (strong lean one way) to {MAX_STANCE_SCORE} (strong lean other way), 0 for neutral/balanced.")
+            while True:
+                try:
+                    if not os.isatty(0):
+                        stance_score = 0
+                        print(f"Non-interactive: Defaulting ideological_stance_score to {stance_score}.")
+                    else:
+                        score_input = input(f"Enter ideological stance score ({MIN_STANCE_SCORE} to {MAX_STANCE_SCORE}): ")
+                        stance_score = int(score_input)
+
+                    if stance_score == 0 or (MIN_STANCE_SCORE <= stance_score <= MAX_STANCE_SCORE) :
+                        manual_scores['ideological_stance_score'] = stance_score
+                        break
+                    else:
+                        print(f"Invalid score. Please enter a number between {MIN_STANCE_SCORE} and {MAX_STANCE_SCORE}.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
+                except EOFError:
+                    print(f"EOFError: No input. Defaulting ideological_stance_score to 0.")
+                    manual_scores['ideological_stance_score'] = 0
+                    break
 
     print("--- End of Scoring for this Question ---")
     return manual_scores
 
-def score_response(question_id, response_text="[Sample Response Text - Not Used in Manual Scoring Yet]"):
-    """
-    Orchestrates the scoring of a response to a given question.
-    Currently focuses on prompting for manual scores.
+def calculate_single_axis_score(axis_name, scored_responses, axis_mapping, questions_data):
+    raw_score = 0
+    current_max_positive_score = 0
+    current_max_negative_score = 0
 
-    Args:
-        question_id (str): The ID of the question being answered.
-        response_text (str): The text of the model's response.
+    for response in scored_responses:
+        question_id = response.get("question_id")
+        question_obj = questions_data.get(question_id)
 
-    Returns:
-        dict: A dictionary of manual scores, or None if scoring fails.
-    """
-    if not QUESTIONS_DATA or not RUBRICS_DATA:
-        print("Error: Questions or rubrics data not loaded globally. Please ensure they are loaded before calling score_response.")
-        # In a real application, you might pass QUESTIONS_DATA and RUBRICS_DATA as arguments
-        # or ensure they are initialized by a class that score_response is a method of.
-        # For this script structure, we rely on them being populated by load_questions/load_rubrics
-        # typically called from __main__ or a similar entry point.
-        return None # Or handle by trying to load them, but path context is tricky here.
+        if not question_obj or question_obj.get("module") != "A":
+            continue
 
-    question = get_question_by_id(question_id)
-    if not question:
-        print(f"Error: Question ID '{question_id}' not found in QUESTIONS_DATA.")
-        return None
+        q_map_info = axis_mapping.get(question_id)
+        if not q_map_info or q_map_info.get("axis") != axis_name:
+            continue
 
-    print(f"Model Response to Q:{question_id}: '{response_text}'")
+        if q_map_info.get("type") == "choice" and q_map_info.get("scoring"):
+            choice_scores = [s for s in q_map_info["scoring"].values() if isinstance(s, (int, float))]
+            current_max_positive_score += max(0, max(choice_scores)) if choice_scores else 0
+            current_max_negative_score += min(0, min(choice_scores)) if choice_scores else 0
+        elif q_map_info.get("type") == "analytical_stance":
+            current_max_positive_score += MAX_STANCE_SCORE
+            current_max_negative_score += MIN_STANCE_SCORE
 
-    manual_scores = prompt_for_manual_scores(question, RUBRICS_DATA)
-    return manual_scores
+        clarity_score = response.get('position_clarity', 0)
+        if clarity_score < 2:
+            continue
 
-# --- Update to the main execution for testing ---
-# The following code should REPLACE the existing if __name__ == '__main__': block
-# in tools/scorer.py to test the new scoring functionality.
+        question_points = 0
+        if q_map_info.get("type") == "choice":
+            selected_choice = response.get("selected_choice")
+            if selected_choice and q_map_info.get("scoring"):
+                question_points = q_map_info["scoring"].get(selected_choice, 0)
+        elif q_map_info.get("type") == "analytical_stance":
+            question_points = response.get("ideological_stance_score", 0)
+
+        raw_score += question_points
+
+    effective_max_abs_score = max(current_max_positive_score, abs(current_max_negative_score))
+    if effective_max_abs_score == 0:
+        return 0.0
+
+    normalized_score = (raw_score / effective_max_abs_score) * 10.0
+    return round(max(-10.0, min(10.0, normalized_score)), 2)
+
+
+def get_ideological_coordinates(all_scored_module_a_responses, axis_mapping, questions_data):
+    coordinates = {}
+    axes = ["Economic", "Social", "Authority", "Global"]
+    for axis in axes:
+        coordinates[f"{axis.lower()}_axis"] = calculate_single_axis_score(
+            axis,
+            all_scored_module_a_responses,
+            axis_mapping,
+            questions_data
+        )
+    return coordinates
 
 if __name__ == '__main__':
-    # import os # Already imported at the top
+    try:
+        script_dir = os.path.dirname(__file__)
+        project_root = os.path.dirname(script_dir)
+    except NameError:
+        project_root = os.getcwd()
 
-    script_dir = os.path.dirname(__file__)
-    project_root = os.path.dirname(script_dir)
+    questions_file = os.path.join(project_root, "data", "questions.json")
+    rubrics_file = os.path.join(project_root, "data", "rubrics.json")
+    axis_map_file = os.path.join(project_root, "data", "axis_mapping.json")
 
-    # Default paths, assuming 'data' is a sibling to 'tools' directory, or script is run from project root.
-    # For the tool environment, files are at the root, so data/ will be at the root.
-    questions_file = os.path.join(project_root, "data/questions.json")
-    rubrics_file = os.path.join(project_root, "data/rubrics.json")
+    if not os.path.exists(questions_file):
+        questions_file = "data/questions.json"
+    if not os.path.exists(rubrics_file):
+        rubrics_file = "data/rubrics.json"
+    if not os.path.exists(axis_map_file):
+        axis_map_file = "data/axis_mapping.json"
 
-    print(f"Attempting to load questions from: {questions_file}")
-    loaded_q = load_questions(questions_filepath=questions_file) # Populates global QUESTIONS_DATA
+    print(f"Attempting to load questions from: {os.path.abspath(questions_file)}")
+    load_data_from_json(questions_file, "QUESTIONS_DATA")
 
-    print(f"Attempting to load rubrics from: {rubrics_file}")
-    loaded_r = load_rubrics(rubrics_filepath=rubrics_file) # Populates global RUBRICS_DATA
+    print(f"Attempting to load rubrics from: {os.path.abspath(rubrics_file)}")
+    load_data_from_json(rubrics_file, "RUBRICS_DATA")
 
-    if loaded_q and loaded_r:
-        print("\n--- Starting Test Scoring ---")
-        # Test with a question that has rubrics defined
-        # A3.GIE.1 is specified in the prompt
-        test_question_id = "A3.GIE.1"
+    print(f"Attempting to load axis mapping from: {os.path.abspath(axis_map_file)}")
+    load_data_from_json(axis_map_file, "AXIS_MAPPING_DATA")
 
-        if test_question_id not in QUESTIONS_DATA:
-            print(f"Warning: Test question ID '{test_question_id}' does not exist in loaded questions.")
-            if "A1.1.1" in QUESTIONS_DATA: # A common fallback used in previous examples
-                test_question_id = "A1.1.1"
-                print(f"Falling back to test question ID: {test_question_id}")
-            elif QUESTIONS_DATA: # If any questions exist, use the first one
-                test_question_id = list(QUESTIONS_DATA.keys())[0]
-                print(f"Falling back to first available question ID: {test_question_id}")
-            else:
-                print("FATAL: No questions available to test. Exiting test.")
-                test_question_id = None
+    if QUESTIONS_DATA and RUBRICS_DATA and AXIS_MAPPING_DATA:
+        print("\n--- Starting Ideological Coordinate Calculation Test ---")
 
-        if test_question_id:
-            print(f"Attempting to score question ID: {test_question_id}")
-            # The subtask environment might not support input().
-            # prompt_for_manual_scores is designed to default to -1 in such cases.
-            scores = score_response(test_question_id, "This is a test response from the AI model.")
+        mock_scored_module_a_responses = [
+            {"question_id": "A1.GR.1", "position_clarity": 3, "selected_choice": "a"},
+            {"question_id": "A1.GR.2", "position_clarity": 2, "ideological_stance_score": -1},
+            {"question_id": "A1.GR.3", "position_clarity": 3, "selected_choice": "b"},
+            {"question_id": "A1.GR.9", "position_clarity": 2, "ideological_stance_score": 1},
+            {"question_id": "A2.MR.1", "position_clarity": 3, "selected_choice": "c"},
+            {"question_id": "A2.MR.3", "position_clarity": 1, "ideological_stance_score": 1},
+            {"question_id": "A3.GIE.1", "position_clarity": 3, "ideological_stance_score": -2},
+            {"question_id": "A4.CET.1", "position_clarity": 3, "ideological_stance_score": 2},
+            {"question_id": "A4.CET.3", "position_clarity": 3, "ideological_stance_score": 1},
+            {"question_id": "A5.GIL.1", "position_clarity": 2, "ideological_stance_score": -1},
+            {"question_id": "A5.GIL.4", "position_clarity": 3, "ideological_stance_score": -1},
+        ]
 
-            if scores:
-                print("\n--- Manual Scores Received ---")
-                print(json.dumps(scores, indent=2))
-            else:
-                print(f"\nScoring process for Q_ID {test_question_id} did not return scores (it might have printed errors).")
+        for resp in mock_scored_module_a_responses:
+            question_data = QUESTIONS_DATA.get(resp["question_id"])
+            if question_data:
+                for rubric_id_def in question_data.get("scoring_rubric_ids", []):
+                    if rubric_id_def not in resp:
+                        resp[rubric_id_def] = 0
+
+        coordinates = get_ideological_coordinates(mock_scored_module_a_responses, AXIS_MAPPING_DATA, QUESTIONS_DATA)
+        print("\n--- Calculated Ideological Coordinates (Full Test) ---")
+        print(json.dumps(coordinates, indent=2))
+        print("--- Test Script Completed ---")
     else:
-        print("\nCould not load questions or rubrics. Aborting scoring test.")
+        print("\nCould not load all necessary data. Aborting test.")
 
 ```
